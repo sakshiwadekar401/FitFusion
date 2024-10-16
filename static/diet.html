@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Recommendation System</title>
+    <link rel="stylesheet" href="/static/css/diet.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Diet Recommendation System</h1>
+
+        <form id="dietForm" aria-labelledby="dietForm">
+            <!-- Goal Selection -->
+            <label for="goal">Select your goal:</label>
+            <select id="goal" name="goal" aria-label="Goal Selection">
+                <option value="weightLoss">Weight Loss</option>
+                <option value="maintainWeight">Maintain Weight</option>
+                <option value="muscleGain">Muscle Gain</option>
+                <option value="fatBurn">Fat Burn with Lean Muscle Retention</option>
+                <option value="enhancePerformance">Enhance Athletic Performance</option>
+                <option value="improveImmunity">Improve Immunity</option>
+                <option value="boneHealth">Bone and Joint Health</option>
+                <option value="gutHealth">Gut Health</option>
+                <option value="mentalWellness">Mental Wellness</option>
+                <option value="energyBoost">Energy Boost</option>
+                <option value="recovery">Recovery from Illness/Surgery</option>
+            </select><br><br>
+
+            <!-- Activity Level Selection -->
+            <label for="activity">Select your activity level:</label>
+            <select id="activity" name="activity" aria-label="Activity Level">
+                <option value="sedentary">Sedentary</option>
+                <option value="lightlyActive">Lightly Active</option>
+                <option value="moderate">Moderately Active</option>
+                <option value="veryActive">Very Active</option>
+                <option value="athlete">Athlete</option>
+                <option value="recoveryMode">Recovery Mode</option>
+                <option value="officeBound">Office-bound/Sedentary</option>
+            </select><br><br>
+
+            <!-- Dietary Preference Selection -->
+            <label for="diet">Select your dietary preference:</label>
+            <select id="diet" name="diet" aria-label="Dietary Preference">
+                <option value="vegetarian">Vegetarian</option>
+                <option value="vegan">Vegan</option>
+                <option value="nonVegetarian">Non-Vegetarian</option>
+                <option value="highProtein">High Protein Diet</option>
+                <option value="glutenFree">Gluten-Free</option>
+                <option value="dairyFree">Dairy-Free</option>
+                <option value="lowCarb">Low-Carb (Keto)</option>
+                <option value="pescatarian">Pescatarian</option>
+                <option value="lowSodium">Low-Sodium Diet</option>
+                <option value="highFiber">High-Fiber</option>
+                <option value="highCalcium">High-Calcium</option>
+                <option value="antiInflammatory">Anti-Inflammatory</option>
+                <option value="lowGI">Low-Glycemic Index (Diabetes)</option>
+            </select><br><br>
+
+            <!-- Recommendation Button -->
+            <button type="button" id="recommendBtn">Get Diet Recommendation</button>
+        </form>
+
+        <!-- Diet Recommendation Display -->
+        <div id="recommendation" aria-live="polite"></div>
+    </div>
+
+    <script src="/static/js/cat.js"></script>
+</body>
+</html>

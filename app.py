@@ -5,6 +5,7 @@ from functools import wraps
 import pandas as pd
 import pickle
 import os
+import re  # For password validation
 
 # Load the model and scaler
 with open('kmeans_model.pkl', 'rb') as f:
@@ -15,34 +16,33 @@ with open('scaler.pkl', 'rb') as f:
 
 app = Flask(__name__)
 
-# SQLite Database setup
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///fitness_website.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = os.urandom(24)  # Required for session management
+app.secret_key = os.urandom(24)
 db = SQLAlchemy(app)
 
-# User model
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
 
-# Decorator to check if user is logged in
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if 'user_id' not in session:
-            return redirect(url_for('login'))  # Redirect to login if not logged in
+            return redirect(url_for('login'))  
         return f(*args, **kwargs)
     return decorated_function
 
-# Route for the home page (index.html)
+
 @app.route('/')
 def home():
     return send_from_directory('static', 'index.html')
 
-# Route for signup
+# Route for signup with password validation rules
 @app.route('/signup', methods=['POST'])
 def signup():
     data = request.get_json()
@@ -59,7 +59,7 @@ def signup():
         return jsonify({'message': 'User already exists!', 'success': False}), 400
 
     # Hash the password before storing
-    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')  # Store the hash as a string
     
     # Store user in the database
     new_user = User(username=username, email=email, password=hashed_password)
@@ -79,15 +79,15 @@ def login():
     if not email or not password:
         return jsonify({'message': 'Email and password are required!', 'success': False}), 400
 
-    # Find user in the database
+
     user = User.query.filter_by(email=email).first()
     if user and bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
         session['user_id'] = user.id  # Store user id in session
-        return jsonify({'message': 'Login successful!', 'success': True})
+        return jsonify({'message': 'Login successful!', 'success': True})  # Respond with success
     else:
         return jsonify({'message': 'Invalid email or password!', 'success': False}), 401
 
-# Route for diet.html (protected)
+
 @app.route('/diet')
 @login_required
 def diet():
@@ -208,12 +208,12 @@ def recommend():
 # Route for logout
 @app.route('/logout')
 def logout():
-    session.pop('user_id', None)  # Remove user id from session
-    return redirect(url_for('home'))  # Redirect to home page
+    session.pop('user_id', None)  
+    return redirect(url_for('home'))  
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()  # Ensure the database and tables are created
+        db.create_all()  
     app.run(debug=True)
 
 

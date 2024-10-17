@@ -1,70 +1,284 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Recommendation System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .input-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        select, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .recommendations {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Diet Recommendation System</h1>
+    <div class="container">
+        <div class="input-group">
+            <label for="goal">Select Your Goal:</label>
+            <select id="goal">
+                <option value="maintain weight">Maintain Weight</option>
+                <option value="muscle gain">Muscle Gain</option>
+                <option value="fat burn with lean muscle retention">Fat Burn with Lean Muscle Retention</option>
+                <option value="enhance athletic performance">Enhance Athletic Performance</option>
+                <option value="improve immunity">Improve Immunity</option>
+                <option value="bone and joint health">Bone and Joint Health</option>
+                <option value="gut health">Gut Health</option>
+                <option value="mental wellness">Mental Wellness</option>
+                <option value="energy boost">Energy Boost</option>
+                <option value="recovery from illness/surgery">Recovery from Illness/Surgery</option>
+            </select>
+        </div>
+
+        <button id="getRecommendations">Get Recommendations</button>
+
+        <div class="recommendations" id="recommendations"></div>
+    </div>
+
+    <script>
+        document.getElementById('getRecommendations').addEventListener('click', async () => {
+            const goal = document.getElementById('goal').value;
+
+            try {
+                const response = await fetch('/recommend', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ goal })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                displayRecommendations(data);
+            } catch (error) {
+                console.error('Error fetching recommendations:', error);
+                document.getElementById('recommendations').innerText = 'Error fetching recommendations. Please try again.';
+            }
+        });
+
+        function displayRecommendations(recommendations) {
+            const recommendationsDiv = document.getElementById('recommendations');
+            recommendationsDiv.innerHTML = ''; // Clear previous recommendations
+
+            if (recommendations.length > 0) {
+                recommendations.forEach(food => {
+                    const foodItem = document.createElement('div');
+                    foodItem.innerHTML = `<strong>Category:</strong> ${food.Category}<br>
+                                          <strong>Description:</strong> ${food.Description}<br>
+                                          <strong>Protein:</strong> ${food['Data.Protein']}g<br>
+                                          <strong>Kilocalories:</strong> ${food['Data.Kilocalories']} kcal<br><br>`;
+                    recommendationsDiv.appendChild(foodItem);
+                });
+            } else {
+                recommendationsDiv.innerText = 'No recommendations available based on your preferences.';
+            }
+        }
+    </script>
+</body>
+</html> -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diet Recommendation System</title>
-    <link rel="stylesheet" href="/static/css/diet.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .input-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        select, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .recommendations {
+            margin-top: 20px;
+        }
+        /* New styles for loading indicator and error message */
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
+
+    <h1>Diet Recommendation System</h1>
     <div class="container">
-        <h1>Diet Recommendation System</h1>
+        <div class="input-group">
+            <label for="goal">Select Your Goal:</label>
+            <select id="goal">
+                <option value="maintain weight">Maintain Weight</option>
+                <option value="muscle gain">Muscle Gain</option>
+                <option value="fat burn with lean muscle retention">Fat Burn with Lean Muscle Retention</option>
+                <option value="enhance athletic performance">Enhance Athletic Performance</option>
+                <option value="improve immunity">Improve Immunity</option>
+                <option value="bone and joint health">Bone and Joint Health</option>
+                <option value="gut health">Gut Health</option>
+                <option value="mental wellness">Mental Wellness</option>
+                <option value="energy boost">Energy Boost</option>
+                <option value="recovery from illness/surgery">Recovery from Illness/Surgery</option>
+            </select>
+        </div>
 
-        <form id="dietForm" aria-labelledby="dietForm">
-            <!-- Goal Selection -->
-            <label for="goal">Select your goal:</label>
-            <select id="goal" name="goal" aria-label="Goal Selection">
-                <option value="weightLoss">Weight Loss</option>
-                <option value="maintainWeight">Maintain Weight</option>
-                <option value="muscleGain">Muscle Gain</option>
-                <option value="fatBurn">Fat Burn with Lean Muscle Retention</option>
-                <option value="enhancePerformance">Enhance Athletic Performance</option>
-                <option value="improveImmunity">Improve Immunity</option>
-                <option value="boneHealth">Bone and Joint Health</option>
-                <option value="gutHealth">Gut Health</option>
-                <option value="mentalWellness">Mental Wellness</option>
-                <option value="energyBoost">Energy Boost</option>
-                <option value="recovery">Recovery from Illness/Surgery</option>
-            </select><br><br>
+        <button id="getRecommendations">Get Recommendations</button>
 
-            <!-- Activity Level Selection -->
-            <label for="activity">Select your activity level:</label>
-            <select id="activity" name="activity" aria-label="Activity Level">
-                <option value="sedentary">Sedentary</option>
-                <option value="lightlyActive">Lightly Active</option>
-                <option value="moderate">Moderately Active</option>
-                <option value="veryActive">Very Active</option>
-                <option value="athlete">Athlete</option>
-                <option value="recoveryMode">Recovery Mode</option>
-                <option value="officeBound">Office-bound/Sedentary</option>
-            </select><br><br>
-
-            <!-- Dietary Preference Selection -->
-            <label for="diet">Select your dietary preference:</label>
-            <select id="diet" name="diet" aria-label="Dietary Preference">
-                <option value="vegetarian">Vegetarian</option>
-                <option value="vegan">Vegan</option>
-                <option value="nonVegetarian">Non-Vegetarian</option>
-                <option value="highProtein">High Protein Diet</option>
-                <option value="glutenFree">Gluten-Free</option>
-                <option value="dairyFree">Dairy-Free</option>
-                <option value="lowCarb">Low-Carb (Keto)</option>
-                <option value="pescatarian">Pescatarian</option>
-                <option value="lowSodium">Low-Sodium Diet</option>
-                <option value="highFiber">High-Fiber</option>
-                <option value="highCalcium">High-Calcium</option>
-                <option value="antiInflammatory">Anti-Inflammatory</option>
-                <option value="lowGI">Low-Glycemic Index (Diabetes)</option>
-            </select><br><br>
-
-            <!-- Recommendation Button -->
-            <button type="button" id="recommendBtn">Get Diet Recommendation</button>
-        </form>
-
-        <!-- Diet Recommendation Display -->
-        <div id="recommendation" aria-live="polite"></div>
+        <div class="loading" id="loading">Loading recommendations...</div>
+        <div class="error" id="error"></div>
+        <div class="recommendations" id="recommendations"></div>
     </div>
 
-    <script src="/static/js/cat.js"></script>
+    <script>
+        const getRecommendationsButton = document.getElementById('getRecommendations');
+        const loadingIndicator = document.getElementById('loading');
+        const errorDiv = document.getElementById('error');
+        const recommendationsDiv = document.getElementById('recommendations');
+
+        getRecommendationsButton.addEventListener('click', async () => {
+            const goal = document.getElementById('goal').value;
+
+            // Clear previous results and show loading indicator
+            recommendationsDiv.innerHTML = '';
+            errorDiv.textContent = '';
+            loadingIndicator.style.display = 'block';
+            getRecommendationsButton.disabled = true;
+
+            try {
+                const response = await fetch('/recommend', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ goal })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                displayRecommendations(data);
+            } catch (error) {
+                console.error('Error fetching recommendations:', error);
+                errorDiv.textContent = 'Error fetching recommendations. Please try again.';
+            } finally {
+                loadingIndicator.style.display = 'none';
+                getRecommendationsButton.disabled = false;
+            }
+        });
+
+        function displayRecommendations(recommendations) {
+            if (recommendations.length > 0) {
+                const table = document.createElement('table');
+                table.innerHTML = `
+                    <tr>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Protein (g)</th>
+                        <th>Kilocalories</th>
+                    </tr>
+                `;
+                recommendations.forEach(food => {
+                    const row = table.insertRow();
+                    row.innerHTML = `
+                        <td>${food.Category}</td>
+                        <td>${food.Description}</td>
+                        <td>${food['Data.Protein']}</td>
+                        <td>${food['Data.Kilocalories']}</td>
+                    `;
+                });
+                recommendationsDiv.appendChild(table);
+            } else {
+                recommendationsDiv.textContent = 'No recommendations available based on your preferences.';
+            }
+        }
+    </script>
 </body>
 </html>

@@ -248,6 +248,16 @@ class User(db.Model):
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
 
+class Workout(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # This is critical
+    date = db.Column(db.DateTime, default=db.func.current_timestamp())
+    exercise = db.Column(db.String(100), nullable=False)
+    duration = db.Column(db.Float, nullable=False)
+    calories_burned = db.Column(db.Float, nullable=False)
+
+    user = db.relationship('User', backref='workouts')  # Relationship to User
+
 # Decorator to check if user is logged in
 def login_required(f):
     @wraps(f)
@@ -375,6 +385,59 @@ def recommend():
     except Exception as e:
         print(f"Error in recommend route: {e}")
         return jsonify({'message': 'An error occurred during recommendation.', 'success': False}), 500
+
+@app.route('/add_workout', methods=['POST'])
+@login_required  # Ensure that only logged-in users can access this route
+def add_workout():
+    data = request.get_json()
+    exercise = data.get('exercise')
+    duration = data.get('duration')
+    calories_burned = data.get('calories_burned')
+
+    # Retrieve user_id from session
+    user_id = session.get('user_id')
+
+    # Validate input
+    if not exercise or duration is None or calories_burned is None:
+        return jsonify({'message': 'All fields are required!', 'success': False}), 400
+
+    # Create a new workout entry
+    new_workout = Workout(user_id=user_id, exercise=exercise, duration=duration, calories_burned=calories_burned)
+    
+    try:
+        db.session.add(new_workout)
+        db.session.commit()
+        return jsonify({'message': 'Workout logged successfully!', 'success': True})
+    except Exception as e:
+        db.session.rollback()  # Roll back the session in case of error
+        return jsonify({'message': 'Failed to log workout.', 'success': False, 'error': str(e)}), 500
+
+
+
+# # Route to fetch workouts
+# @app.route('/workouts', methods=['GET'])
+# def get_workouts():
+#     workouts = Workout.query.all()
+#     workouts_list = [{'id': w.id, 'exercise': w.exercise, 'duration': w.duration, 
+#                       'calories_burned': w.calories_burned, 'date': w.date} for w in workouts]
+#     return jsonify(workouts_list)
+
+
+@app.route('/workouts', methods=['GET'])
+@login_required
+def get_workouts():
+    user_id = session.get('user_id')
+    workouts = Workout.query.filter_by(user_id=user_id).all()
+    workout_list = []
+    for workout in workouts:
+        workout_list.append({
+            'date': workout.date,
+            'exercise': workout.exercise,
+            'duration': workout.duration,
+            'calories_burned': workout.calories_burned
+        })
+    return jsonify(workout_list)
+
 
 # Route for logout
 @app.route('/logout')

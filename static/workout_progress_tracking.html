@@ -1,19 +1,18 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workout | Progress Tracking</title>
-    <!-- Include Chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Workout Progress Tracking</h1> <!-- Added a heading for better UX -->
+    <h1>Workout Progress Tracking</h1> 
 
     <form id="workout-form">
         <input type="text" id="exercise" placeholder="Exercise" required>
-        <input type="number" id="duration" placeholder="Duration (minutes)" required min="0"> <!-- Added min attribute -->
-        <input type="number" id="calories_burned" placeholder="Calories Burned" required min="0"> <!-- Added min attribute -->
+        <input type="number" id="duration" placeholder="Duration (minutes)" required min="0">
+        <input type="number" id="calories_burned" placeholder="Calories Burned" required min="0">
         <button type="submit">Log Workout</button>
     </form>
 
@@ -121,6 +120,146 @@
 }
 
 
+    </script>  
+</body>
+</html> -->
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout | Progress Tracking</title>
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/static/css/W_P.css"> <!-- Link to the CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1>Workout Progress Tracking</h1> <!-- Added a heading for better UX -->
+
+        <form id="workout-form">
+            <div class="form-group">
+                <input type="text" id="exercise" placeholder="Exercise" required>
+            </div>
+            <div class="form-group">
+                <input type="number" id="duration" placeholder="Duration (minutes)" required min="0"> <!-- Added min attribute -->
+            </div>
+            <div class="form-group">
+                <input type="number" id="calories_burned" placeholder="Calories Burned" required min="0"> <!-- Added min attribute -->
+            </div>
+            <button type="submit" class="btn">Log Workout</button>
+        </form>
+
+        <div id="workout-progress">
+            <canvas id="myChart" width="400" height="200"></canvas> 
+        </div>
+    </div>
+
+    <script>
+        // Event listener for the form submission
+        document.getElementById('workout-form').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent page reload
+
+            const exercise = document.getElementById('exercise').value;
+            const duration = document.getElementById('duration').value;
+            const caloriesBurned = document.getElementById('calories_burned').value;
+
+            fetch('/add_workout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    exercise,
+                    duration: parseFloat(duration),
+                    calories_burned: parseFloat(caloriesBurned)
+                }) // Ensure values are numbers
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => { throw new Error(text) }); // Log the error text if not ok
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert(data.message);
+                fetchWorkouts();  // Fetch and update the workout list
+            })
+            .catch(error => console.error('Error:', error)); // Error handling
+        });
+
+        // Function to fetch workouts from the server
+        function fetchWorkouts() {
+            fetch('/workouts')
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => { throw new Error(text) }); // Log the error text if not ok
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Update the workout progress visualization here
+                visualizeWorkouts(data);
+            })
+            .catch(error => console.error('Error:', error)); // Error handling
+        }
+
+        function visualizeWorkouts(workouts) {
+            const ctx = document.getElementById('myChart').getContext('2d');
+
+            // Check if workouts data is empty
+            if (workouts.length === 0) {
+                alert('No workouts logged yet.');
+                return; // Exit the function if no data
+            }
+
+            // Destroy the existing chart instance if it exists
+            if (window.myChart instanceof Chart) {
+                window.myChart.destroy();
+            }
+
+            // Prepare the data for the chart
+            const labels = workouts.map(workout => new Date(workout.date).toLocaleDateString());
+            const dataDuration = workouts.map(workout => workout.duration);
+            const dataCalories = workouts.map(workout => workout.calories_burned);
+
+            // Create a new chart instance
+            window.myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Duration (minutes)',
+                            data: dataDuration,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            fill: false,
+                        },
+                        {
+                            label: 'Calories Burned',
+                            data: dataCalories,
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            fill: false,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
     </script>  
 </body>
 </html>

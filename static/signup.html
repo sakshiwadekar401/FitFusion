@@ -25,6 +25,8 @@
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" class="form-control" required>
+                <small id="passwordHelp" class="form-text text-muted">Your password must contain at least one letter, one special character, and one number.</small>
+                <div id="password-error" class="text-danger" style="display: none;"></div>
             </div>
             <button type="submit" class="btn btn-primary">Sign Up</button>
         </form>
@@ -40,6 +42,19 @@
             const username = document.getElementById('username').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+
+            // Password validation
+            const passwordError = document.getElementById('password-error');
+            passwordError.style.display = 'none'; // Hide previous error
+
+            // Regular expression for password validation
+            const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            if (!passwordPattern.test(password)) {
+                passwordError.innerText = 'Password must contain at least one letter, one number, and one special character.';
+                passwordError.style.display = 'block'; // Show error message
+                return; // Stop form submission
+            }
 
             const response = await fetch('/signup', {
                 method: 'POST',

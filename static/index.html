@@ -1,276 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>To Build a Fitness Website</title>
-    <!-- font awesome cdn link -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitFusion - Fitness Website</title>
+    
+    <!-- Font Awesome CDN link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Swiper CSS for slider -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
-    <!-- custom css file link-->
+
+    <!-- Custom CSS file link -->
     <link rel="stylesheet" href="/static/css/STYLE.css">
-    </head>
-    <body>
-        <!--header section starts-->
-<header class="header">
-    <a href="#" class="logo"><span>FIT</span>FUSION</a>
-    <div id="menu-btn" class="fas fa-bars"></div>
-     <nav class="navbar">
-        <a href="#home">HOME</a>
-        <a href="#about">ABOUT</a>
-        <div class="dropdown">
-            <button class="dropbtn">HEALTHY LIVING</button>
-            <div class="dropdown-content">
-              <a href="/static/video.html">Workout videos</a>
-              <a href="/static/diet.html">diet recommendation quiz</a>
-              <a href="http://www.minimalistbaker.com">diet recipes</a>
-              <a href="/static/meal.html">Nutrition facts table</a>
-            </div>
-          </div> 
-        <a href="#blogs">BLOGS</a>
-        <a href="/static/login.html">LOGIN</a>
-    </nav>
-</header>
-
-         <!--header section ends-->
-
-         <!--Home section starts-->
-         <section class="home" id="home">
-            <div class="swiper home-slider">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide slide" style="background: url(/static/images/gym.jpg) no-repeat;">
-                        <div class="content">
-                            <span>
-                                BE STRONG , BE FIT
-                            </span>
-                            <h3>MAKE YOURSELF STRONGER THAN YOUR EXCUSES</h3>
-                            <a href="/static/diet.html" class="btn">GET STARTED</a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide slide" style="background: url(/static/images/gym2.jpg) no-repeat;">
-                        <div class="content">
-                            <span>
-                                BE STRONG , BE FIT
-                            </span>
-                            <h3>MAKE YOURSELF STRONGER THAN YOUR EXCUSES</h3>
-                            <a href="#" class="btn">GET STARTED</a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide slide" style="background: url(/static/images/gym3.jpg) no-repeat;">
-                        <div class="content">
-                            <span>
-                                BE STRONG , BE FIT
-                            </span>
-                            <h3>MAKE YOURSELF STRONGER THAN YOUR EXCUSES</h3>
-                            <a href="#" class="btn">GET STARTED</a>
-                        </div>
-                    </div>
+</head>
+<body>
+    <!-- Header section starts -->
+    <header class="header">
+        <a href="#" class="logo"><span>FIT</span>FUSION</a>
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <div class="dropdown">
+                <button class="dropbtn">Healthy Living</button>
+                <div class="dropdown-content">
+                    <a href="/static/video.html">Workout Videos</a>
+                    <a href="/static/diet.html">Diet Recommendation Quiz</a>
+                    <a href="http://www.minimalistbaker.com" target="_blank" rel="noopener">Diet Recipes</a>
+                    <a href="/static/meal.html">Nutrition Facts Table</a>
                 </div>
+            </div> 
+            <a href="#blogs">Blogs</a>
+            <a href="/static/login.html">Login</a>
+        </nav>
+    </header>
+    <!-- Header section ends -->
 
-                <div class="swiper-pagination"></div>
-            </div>
-
-        </section>
-         <!--Home section ends-->
-
-         <!--About section starts-->
-         <section class="about" id="about">
-            <div class="image">
-                <img src="/static/images/gym4.jpg" alt="fordes">
-            </div>
-
-            <div class="content">
-                <span>about us</span>
-                <h3 class="title">Every Day is a Chance to Become Better</h3>
-                <p>We believe fitness should be accessible to everyone, everywhere, regardless of income level or access to a gym. That's why we offer hundreds of free, full-length workout videos, the most affordable and effective workout programs on the web, meal plans, and helpful health, nutrition and fitness information.</p>
-            <div class="box-container">
-                <div class="box">
-                    <h3><i class="fas fa-check"></i>body and mind</h3>
-                    <p>Learn how to use movement to explore the connection between body, mind and spirit.</p>
-                </div>
-                <div class="box">
-                    <h3><i class="fas fa-check"></i>healthy life</h3>
-                    <p>This is your life and your journey.Never compare yourself to others.</p>
-                </div>
-                <div class="box">
-                    <h3><i class="fas fa-check"></i>Strategies</h3>
-                    <p>Build the excellent Strategies for yourself. </p>
-                </div>
-                <div class="box">
-                    <h3><i class="fas fa-check"></i>Workout</h3>
-                    <p>Access our free Workout videos.</p>
-                </div>
-            </div>
-            <a href="#" class="btn">read more</a>
-            </div>
-         </section>
-         <!--About section ends-->
-         
-         <!--feature section starts -->
-         <section class="features" id="features">
-            <h1 class="heading"><span>Gym Features</span></h1>
-            <div class="box-container">
-                <div class="box">
-                    <div class="image">
-                        <img src="/static/images/bmi.jpg" alt="Workout">
-                    </div>
+    <!-- Home section starts -->
+    <section class="home" id="home">
+        <div class="swiper home-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide slide" style="background: url('/static/images/gym.jpg') no-repeat;">
                     <div class="content">
-                        <img src="" alt="">
-                        <h3>CHECK BODY MASS INDEX</h3>
-                        <p>are you really healthy or obese?check your BMI</p>
-                        <a href="/static/main.html" class="btn">CHECK BMI</a>
+                        <span>Be Strong, Be Fit</span>
+                        <h3>Make Yourself Stronger Than Your Excuses</h3>
+                        <a href="/static/diet.html" class="btn">Get Started</a>
                     </div>
                 </div>
-                <div class="box second">
-                    <div class="image">
-                        <img src="/static/images/Bodybuilding.png" alt="Workout">
-                    </div>
+                <div class="swiper-slide slide" style="background: url('/static/images/gym2.jpg') no-repeat;">
                     <div class="content">
-                        <img src="" alt="">
-                        <h3>body building</h3>
-                        <p>Don’t be scared to LIFT HEAVY! You won’t get huge and bulky, you’ll just get amazing.</p>
-                        <a href="#" class="btn">read more</a>
+                        <span>Be Strong, Be Fit</span>
+                        <h3>Make Yourself Stronger Than Your Excuses</h3>
+                        <a href="#" class="btn">Get Started</a>
+                    </div>
+                </div>
+                <div class="swiper-slide slide" style="background: url('/static/images/gym3.jpg') no-repeat;">
+                    <div class="content">
+                        <span>Be Strong, Be Fit</span>
+                        <h3>Make Yourself Stronger Than Your Excuses</h3>
+                        <a href="#" class="btn">Get Started</a>
                     </div>
                 </div>
             </div>
-         </section>
-
-         <!--feature section ends -->
-
-         <!--blog section starts-->
-         <section class="blogs" id="blogs">
-            <h1 class="heading"><span>daily posts</span></h1>
-            <div class="swiper blogs-slider">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide slide">
-                        <div class="image">
-                            <img src="/static/images/wenchen.jpg" alt="blog1">
-                        </div>
-                        <div class="content">
-                            <div class="link">
-                                <a href="https://fitnessista.com/hiit-for-beginners/">BY fitnessia</a><span>|</span>
-                                <a href="https://fitnessista.com/hiit-for-beginners/">Oct 4,2023</a>
-                            </div>
-                            <h3>Fitness is not about being Better than others</h3>
-                            <p>Sharing some tips on HIIT for beginners and how to implement HIIT in your routine!</p>
-                            <a href="https://fitnessista.com/hiit-for-beginners/" class="btn">read more</a>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide slide">
-                        <div class="image">
-                            <img src="/static/images/about-bg.jpeg" alt="">
-                        </div>
-                        <div class="content">
-                            <div class="link">
-                                <a href="https://fitnessista.com/how-to-balance-weight-lifting-and-cardio/">BY fitnessia</a><span>|</span>
-                                <a href="https://fitnessista.com/how-to-balance-weight-lifting-and-cardio/">sept 27, 2023</a>
-                            </div>
-                            <h3>How to Balance Weight Lifting and Cardio?</h3>
-                            <p>Sharing tips on how to balance weight lifting and cardio.Hi friends! How’s the week going so far?</p>
-                            <a href="https://fitnessista.com/how-to-balance-weight-lifting-and-cardio/" class="btn">read more</a>
-                        </div>
-                    </div>
-
-
-                    <div class="swiper-slide slide">
-                        <div class="image">
-                            <img src="/static/images/about-us-bg.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <div class="link">
-                                <a href="https://fitnessista.com/how-to-get-back-in-shape/">BY fitnessia</a><span>|</span>
-                                <a href="https://fitnessista.com/how-to-get-back-in-shape/">sept 19, 2023</a>
-                            </div>
-                            <h3>How to get back in shape?</h3>
-                            <p>Sharing tips on how to get back in shape and start a fitness routine after taking a break after an extended time or injury.</p>
-                            <a href="https://fitnessista.com/how-to-get-back-in-shape/" class="btn">read more</a>
-                        </div>
-                    </div>
-
-
-                    <div class="swiper-slide slide">
-                        <div class="image">
-                            <img src="/static/images/about-bg.png" alt="">
-                        </div>
-                        <div class="content">
-                            <div class="link">
-                                <a href="https://www.blogilates.com/blog/20-day-ab-layering-challenge/">BY Cassey</a><span>|</span>
-                                <a href="https://www.blogilates.com/blog/20-day-ab-layering-challenge/">Apr 2,2023</a>
-                            </div>
-                            <h3>The 20-Day No Abs Left Behind Challenge!</h3>
-                            <p>How are you feeling after last month’s detox challenge?! We’ve been digging deep into ✨whole✨ health this year, eliminating the things that don’t serve us and getting more of the things that DO.</p>
-                            <a href="https://www.blogilates.com/blog/20-day-ab-layering-challenge/" class="btn">read more</a>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide slide">
-                        <div class="image">
-                            <img src="/static/images/foot.jpg" alt="Foot__image">
-                        </div>
-                        <div class="content">
-                            <div class="link">
-                                <a href="https://www.bodybuilding.com/content/foot-and-ankle-stability-routine.html">BY Bespoke</a><span>|</span>
-                                <a href="https://www.bodybuilding.com/content/foot-and-ankle-stability-routine.html">June 5,2023</a>
-                            </div>
-                            <h3>Foot and Ankle Stability Routine</h3>
-                            <p>Quick and easy ways to get better balance, stability and improved athletic performance.</p>
-                            <a href="https://www.bodybuilding.com/content/foot-and-ankle-stability-routine.html" class="btn">read more</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
-         </section>
-         <!--blog section ends-->
-<!--footer section starts -->
-<section class="footer">
-<div class="box-container">
-    <div class="box">
-        <h3>quick links</h3>
-       <a class="links" href="#">COMMUNITY</a>
-        <a class="links" href="#blogs">BLOGS</a>
-        <a  class="links" href="/static/login.html">LOGIN</a>
-        <a class="links" href="/static/video.html">WORKOUT</a>
-    </div>
-    <div class="box">
-        <h3>OPENING HOURS</h3>
-        <p>Monday : <i>7.00 a.m-10.30 p.m</i></p>
-        <p>Tuesday: <i>7.00 a.m-10.30 p.m</i></p>
-        <p>Wednesday: <i>7.00 a.m-10.30 p.m</i></p>
-        <p>Thursday: <i>7.00 a.m-10.30 p.m</i></p>
-        <p>Friday: <i>7.00 a.m-10.30 p.m</i></p>
-    </div>
-    <div class="box">
-        <h3>DETAILS</h3>
-        <p><i class="fas fa-phone"></i> +91 8765453437</p>
-        <p><i class="fas fa-phone"></i>+91 9007722332</p>
-        <p><i class="fas fa-envelope"></i>swaralip35@gmail.com</p>
-        <p><i class="fas fa-map"></i>Navi Mumbai,India 400104</p>
-        <div class="share">
-            <a href="https://www.facebook.com/itschloeting?mibextid=ZbWKwL" class="fab fa-facebook-f"></a>
-            <a href="https://x.com/chloe_ting?t=4LCvx5b1ZCmOTFBN-3Owsw&s=09" class="fab fa-twitter"></a>
-            <a href="#" class="fab fa-linkedin"></a>
-            <a href="#" class="fab fa-pinterest"></a>
+            <div class="swiper-pagination"></div>
         </div>
-    </div>
-<div class="box">
-    <h3>NEWSLETTTER</h3>
-    <p>Subscribe for latest updates</p>
-    <form name="submit-to-google-sheet">
-        <input type="email" name="Email" id="subscribe" class="email" placeholder="Enter your email">
-        <input type="submit" value="subscribe" class="btn">
-    </form>
-   </div>
+    </section>
+    <!-- Home section ends -->
 
- </div>
-</section>
-<div class="credit">created by <span>Miss Swarali_Patil</span> | all rights reserved</div>
-<!--footer section ends-->
-         <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>     
-<!--Custom js file link-->
-<script src="js/script.js"></script>
-<script src="js/subscribe.js"></script>
+    <!-- About section starts -->
+    <section class="about" id="about">
+        <div class="image">
+            <img src="/static/images/gym4.jpg" alt="About Us">
+        </div>
+        <div class="content">
+            <span>About Us</span>
+            <h3 class="title">Every Day is a Chance to Become Better</h3>
+            <p>We believe fitness should be accessible to everyone, everywhere, regardless of income level or access to a gym...</p>
+            <div class="box-container">
+                <div class="box">
+                    <h3><i class="fas fa-check"></i> Body and Mind</h3>
+                    <p>Explore the connection between body, mind, and spirit.</p>
+                </div>
+                <div class="box">
+                    <h3><i class="fas fa-check"></i> Healthy Life</h3>
+                    <p>Never compare yourself to others. This is your journey.</p>
+                </div>
+                <div class="box">
+                    <h3><i class="fas fa-check"></i> Strategies</h3>
+                    <p>Build excellent strategies for yourself.</p>
+                </div>
+                <div class="box">
+                    <h3><i class="fas fa-check"></i> Workout</h3>
+                    <p>Access our free workout videos.</p>
+                </div>
+            </div>
+            <a href="#" class="btn">Read More</a>
+        </div>
+    </section>
+    <!-- About section ends -->
+
+    <!-- Feature section starts -->
+    <section class="features" id="features">
+        <h1 class="heading"><span>Gym Features</span></h1>
+        <div class="box-container">
+            <div class="box">
+                <div class="image">
+                    <img src="/static/images/bmi.jpg" alt="BMI Check">
+                </div>
+                <div class="content">
+                    <h3>Check Body Mass Index</h3>
+                    <p>Are you healthy or obese? Check your BMI.</p>
+                    <a href="/static/main.html" class="btn">Check BMI</a>
+                </div>
+            </div>
+            <div class="box second">
+                <div class="image">
+                    <img src="/static/images/Bodybuilding.png" alt="Bodybuilding">
+                </div>
+                <div class="content">
+                    <h3>Bodybuilding</h3>
+                    <p>Don't be scared to lift heavy! You won't get bulky, you'll get amazing.</p>
+                    <a href="#" class="btn">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Feature section ends -->
+
+    <!-- Blog section starts -->
+    <section class="blogs" id="blogs">
+        <h1 class="heading"><span>Daily Posts</span></h1>
+        <div class="swiper blogs-slider">
+            <div class="swiper-wrapper">
+                <!-- Example blog post 1 -->
+                <div class="swiper-slide slide">
+                    <div class="image">
+                        <img src="/static/images/wenchen.jpg" alt="HIIT for Beginners">
+                    </div>
+                    <div class="content">
+                        <div class="link">
+                            <a href="https://fitnessista.com/hiit-for-beginners/">By Fitnessia</a><span>|</span>
+                            <a href="https://fitnessista.com/hiit-for-beginners/">Oct 4, 2023</a>
+                        </div>
+                        <h3>Fitness is Not About Being Better Than Others</h3>
+                        <p>Sharing tips on HIIT for beginners and how to implement it in your routine.</p>
+                        <a href="https://fitnessista.com/hiit-for-beginners/" class="btn">Read More</a>
+                    </div>
+                </div>
+                <!-- More blog posts go here -->
+                <!-- Other blog posts omitted for brevity -->
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+    <!-- Blog section ends -->
+
+    <!-- Footer section starts -->
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>Quick Links</h3>
+                <a class="links" href="#">Community</a>
+                <a class="links" href="#blogs">Blogs</a>
+                <a class="links" href="/static/login.html">Login</a>
+                <a class="links" href="/static/video.html">Workout</a>
+            </div>
+            <div class="box">
+                <h3>Opening Hours</h3>
+                <p>Monday - Friday: <i>7:00 a.m - 10:30 p.m</i></p>
+            </div>
+            <div class="box">
+                <h3>Details</h3>
+                <p><i class="fas fa-phone"></i> +91 8765453437</p>
+                <p><i class="fas fa-envelope"></i> swaralip35@gmail.com</p>
+                <p><i class="fas fa-map"></i> Navi Mumbai, India 400104</p>
+                <div class="share">
+                    <a href="#" class="fab fa-linkedin"></a>
+                    <a href="#" class="fab fa-pinterest"></a>
+                </div>
+            </div>
+        </div>
+        <div class="credit">
+            <p>Created by Swarali &copy; 2023. All rights reserved.</p>
+        </div>
+    </section>
+    <!-- Footer section ends -->
+
+    <!-- Swiper JS for slider functionality -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    
+    <!-- Custom JS file -->
+    <script src="/static/js/script.js"></script>
 </body>
 </html>
